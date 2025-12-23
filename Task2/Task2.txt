@@ -1,0 +1,47 @@
+---
+
+## Что получится на выходе (по требованиям)
+
+* `knowledge_base/` — 30+ документов `.md` или `.txt` (1 файл = 1 сущность/страница)
+* `terms_map.json` — словарь замен `"original" -> "fictional"`
+* скрипт (или описание) подмены терминов
+
+---
+
+## Вариант предметной области
+
+Берём **Star Wars** (персонажи, планеты, организации, технологии, события).
+Затем заменяем *все ключевые сущности* на вымышленные: имена, планеты, фракции, технологии (“Jedi”, “The Force”, “Lightsaber” и т.д.).
+
+---
+
+### 2) Скрипт `build_knowledge_base.py` лежит в корне проекта
+
+### 3) Запуск
+
+```bash
+python build_knowledge_base.py
+```
+
+После этого у вас появятся:
+
+* `knowledge_base/*.md` (30+ файлов)
+* `terms_map.json`
+
+---
+
+## Как убедиться, что мир “не угадывается” по памяти модели
+
+1. Откройте 2–3 файла и проверьте, что **нет “Jedi / Sith / Darth Vader / Star Wars / Tatooine…”**
+2. Задайте LLM вопрос **без RAG** (или с отключенным retrieval): она должна **не знать** терминов типа “Xarn Velgor”, “Synth Flux”.
+3. С включённым RAG — должна отвечать и приводить источники.
+
+---
+
+* “В качестве исходного мира выбрана вселенная Star Wars. Для получения текста использовали MediaWiki API TextExtracts в режиме plaintext.” ([MediaWiki][2])
+* “Сформирован `terms_map.json` (оригинал→вымышленное), выполнена замена всех вхождений (с приоритетом длинных фраз), база сохранена в `knowledge_base/` (30+ документов).”
+* “Проверка: без retrieval модель не знает вымышленные сущности; с retrieval отвечает и цитирует источники.”
+
+
+[1]: https://www.fandom.com/terms-of-use?utm_source=chatgpt.com "Terms of Use"
+[2]: https://www.mediawiki.org/wiki/Extension%3ATextExtracts?utm_source=chatgpt.com "Extension:TextExtracts"
