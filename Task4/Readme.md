@@ -74,8 +74,6 @@ Chain-of-Thought (CoT)
 Интерфейс
 
 Реализован простой консольный бот (REPL):
-
-🧠 RAG Bot (type 'exit' to quit)
 > What is Synth Flux?
 A: ...
 Sources: synth-flux.md, astra-monks.md
